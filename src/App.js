@@ -42,25 +42,42 @@ function App() {
 
   const [amo1,setAmo1] = useState(1);
   const [amo2,setAmo2] = useState(1);
-  const [cur1,setCur1] = useState(1);
-  const [cur2,setCur2] = useState(1);
+  const [cur1,setCur1] = useState('Bitcoin');
+  const [cur2,setCur2] = useState('Bitcoin');
   
   const handleAmo1 = (amo1) =>{
-    setAmo2(amo1 * cur1 / cur2);
+    const cu1 =  nameState.filter((i)=>  {return i.name === cur1 })
+    const ew1 = cu1.map(i=>i.current_price)
+    const cu2 =  nameState.filter((i)=>  {return i.name === cur2 })
+    const ew2 = cu2.map(i=>i.current_price)
+    setAmo2(amo1 * ew1 / ew2);
     setAmo1(amo1);
   }
   const handleCur1 = (cur1) => {
-    setAmo2(amo1 * cur1 / cur2);
-    setCur1(cur1)
+    const cu1 =  nameState.filter((i)=>  {return i.name === cur1 })
+    const ew1 = cu1.map(i=>i.current_price)
+    const cu2 =  nameState.filter((i)=>  {return i.name === cur2 })
+    const ew2 = cu2.map(i=>i.current_price)
+    setAmo2(amo1 * ew1/ ew2);
+    setCur1(cur1);
+    // console.log(ew2 )
   }
 
   const handleAmo2 = (amo2, ) =>{
-    setAmo1(amo2 * cur2 / cur1);
+    const cu1 =  nameState.filter((i)=>  {return i.name === cur1 })
+    const ew1 = cu1.map(i=>i.current_price)
+    const cu2 =  nameState.filter((i)=>  {return i.name === cur2 })
+    const ew2 = cu2.map(i=>i.current_price)
+    setAmo1(amo2 * ew2 / ew1);
     setAmo2(amo2);
   }
   const handleCur2 = (cur2) => {
-    setAmo1(amo2 * cur2 / cur1);
-    setCur2(cur2)
+    const cu1 =  nameState.filter((i)=>  {return i.name === cur1 })
+    const ew1 = cu1.map(i=>i.current_price)
+    const cu2 =  nameState.filter((i)=>  {return i.name === cur2 })
+    const ew2 = cu2.map(i=>i.current_price)
+    setAmo1(amo2 * ew2 / ew1);
+    setCur2(cur2);
   }
 
 
