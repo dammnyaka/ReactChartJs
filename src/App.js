@@ -42,8 +42,8 @@ function App() {
 
   const [amo1,setAmo1] = useState(1);
   const [amo2,setAmo2] = useState(1);
-  const [cur1,setCur1] = useState(2);
-  const [cur2,setCur2] = useState(2);
+  const [cur1,setCur1] = useState(1);
+  const [cur2,setCur2] = useState(1);
   
   const handleAmo1 = (amo1) =>{
     setAmo2(amo1 * cur1 / cur2);
