@@ -1,0 +1,23 @@
+.input_block{
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  input {
+    margin-right: 10px;
+    width: 20%;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    outline-color: none;
+    background-color: #1a1a1a;
+    color: white;
+  }
+  select{
+    width: 20%;
+    border: none;
+    border-radius: 5px;
+    outline-color: transparent;
+    background-color: #1a1a1a;
+    color: white;
+  }
+}

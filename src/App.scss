@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;600&display=swap");
+
+.app_block {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-family: 'Vazirmatn';
+  background-color: rgb(0, 0, 0);
+}
+
+.header_profile {
+  font-size: 25px;
+  position: relative;
+  width: 40vw;
+  height: 30px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  text-align: center;
+  letter-spacing: 1px;
+  cursor: pointer;
+    h1 {
+      color: #ffffff;
+      margin-top: 30px;
+    }
+    h2 {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    &:hover {
+      span {
+        display: inline-block;
+        animation: mirror 0.3s both;
+      }
+      span:nth-child(1){animation-delay: .3s;}
+      span:nth-child(2){animation-delay: .25s;}
+      span:nth-child(3){animation-delay: .2s;}
+      span:nth-child(4){animation-delay: .15s;}
+      span:nth-child(5){animation-delay: .1s;}
+      span:nth-child(6){animation-delay: .05s;}
+      span:nth-child(7){animation-delay: 0s;}
+      
+      @keyframes mirror {to {transform:translate3d(0,-55px,0)}}
+    }
+}
+
+.header {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 20px;
+  
+  &_title {
+    font-size: 24px;
+    font-family: 'Vazirmatn';
+    font-weight: 700;
+    width: 60vw;
+    margin-right: 1.5%;
+    cursor: pointer;
+      a {
+        outline: none;
+        text-decoration: none;
+        color: #bb9e88;
+      }
+      a::after{
+        content: " solution";
+        color: #bb9e88;
+        font-size: 24px;
+        font-weight: 300;
+      }
+      a:hover,a:hover::after {
+        color: darken(#bb9e88 ,6%);
+      }
+      a:active,a:active::after {
+        color: darken(#bb9e88 ,22%);
+      }
+  }
+}
+
+.main {
+  display: flex;
+  &_convert{
+    display: block;
+  }
+  &_coin {
+    display: block;
+    width: 40vw;
+    height: 72.7vh;
+    background-color: black;
+    flex: 1;
+    flex-grow: 1;
+    overflow: auto;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+    background-color: none;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #bdbdbd96;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    box-shadow: inset 1px 1px 10px #bdbdbdfa;
+  }
+  &_charts {
+    width: 60vw;
+    height: 80vh;
+    background-color: rgba(92, 92, 92, 0.281);
+    margin-right: 1.5%;
+  }
+}
+
+.loading {
+  color: white;
+  width: 40vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
