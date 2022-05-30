@@ -16,3 +16,4 @@ Stack:
 ReactJS (useState, useEffect)
 ChartJs
 Axios
+SCSS
