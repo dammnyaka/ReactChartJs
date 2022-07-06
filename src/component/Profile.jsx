@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useRef } from 'react';
 import { Pie } from 'react-chartjs-2';
 
 
@@ -6,40 +7,33 @@ import './Profile.scss'
 
 const Profile = ({items, change, backProfile}) => {
 
-  const [crypto, setCrypto] = useState(0);
+  const [crypto, setCrypto] = useState('');
   const [total, setTotal] = useState(0)
   const [usd] = useState(1);
 
-
-  const sData = {
-    labels: [456],
-    datasets: [{
-      id: 1,
-      data: [123],
-      backgroundColor: ['rgb(187,158,136,0.7)','rgb(255,161,181,0.8)','rgb(128,174,255,0.8)'],
-    }],
-}
-
-const [isData,setData] = useState(sData)
+  const [isData,setData] = useState([])
+  // const asd = useRef()
   const plusChange = (item) => {
-    if(usd * item.current_price*crypto>0) {
-      setTotal(total + (usd * item.current_price*crypto))
-      setData({
-        labels:[...sData.labels,item.name],
-        datasets:[{id:[...sData.datasets.map(i=>i.id),item.id],
-                   data:[...sData.datasets.map(i=>i.data),item.current_price*crypto],
-                   backgroundColor:[...sData.datasets.map(i=>i.backgroundColor)],
-                }]})
-    }
-    setCrypto(0)
+    if(item.current_price*crypto>0 && item.name) {
+      let obj = {
+                  labels: item.name,
+                  datasets: [{
+                    data: item.current_price*crypto,
+                    backgroundColor: `#${Math.random().toString(16).substring(7)}`
+                  }]
+                }
+      setTotal(total + (item.current_price*crypto))
+      setData(...isData.push(obj))
+    } 
   }
+  
   const  minusChange = (item) => {
     if(total - (usd * item.current_price* crypto) >= 0){
       setTotal(total - (usd * item.current_price* crypto)) 
     }else {
       setTotal(0)
     }
-    setCrypto(0)
+    // setCrypto('')
   }
   return (
     <div className='profile'>
@@ -58,14 +52,16 @@ const [isData,setData] = useState(sData)
                             <button className='profile_bar-minus' onClick={()=>minusChange(item)}>-</button>
                             <input type="number" 
                               placeholder='0'
-                              value={crypto.id} 
-                              onChange={e=> { 
-                                let value = e.target.value;
-                                value = value.replace(/^\D+$/);
-                                setCrypto(value);
-                              }} 
+                              name={item.name}
+                              // defaultValue=''
+                              // ref={asd}
+                              // value={crypto} 
+                              onChange={e=> {
+                                  setCrypto(e.target.value)
+                                }
+                              }
                               />
-                            <button className='profile_but-plus active'  onClick={()=>{plusChange(item);}}>+</button>
+                            <button className='profile_but-plus active' onClick={()=> plusChange(item)}>+</button>
                           </div>
                       </div>)}
                     </div>
@@ -73,16 +69,21 @@ const [isData,setData] = useState(sData)
           </div>
           <button 
             onClick={()=>backProfile(true)} 
-            className='profile_block-back'
-           >
+            className='profile_block-back'>
              back
            </button>
         </div>
         <div className='profile_block-line'></div>
         <div className='profile_block-value'>
           <div className='profile_pie'>
-          <Pie
-          data={isData}
+           <Pie
+              data={{
+                labels: isData.map(x=>x.labels),
+                datasets: [{
+                  data: isData.map(x=> x.datasets[0].data),
+                  backgroundColor: isData.map(x=> x.datasets[0].backgroundColor)
+                }]
+              }}
             />
           </div>
         </div>

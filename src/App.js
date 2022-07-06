@@ -58,9 +58,8 @@ function App() {
     const ew1 = cu1.map(i=>i.current_price)
     const cu2 =  nameState.filter((i)=>  {return i.name === cur2 })
     const ew2 = cu2.map(i=>i.current_price)
-    setAmo2(amo1 * ew1/ ew2);
+    setAmo2(amo1 * ew1 / ew2);
     setCur1(cur1);
-    // console.log(ew2 )
   }
 
   const handleAmo2 = (amo2, ) =>{
@@ -111,7 +110,7 @@ function App() {
         </div>
           {isProfile ? 
             <div className='main'>
-              {isLoading ? nameState&&
+              {isLoading ? nameState &&
               <div> 
                 <div className='main_convert'>
                   <InputConverter
