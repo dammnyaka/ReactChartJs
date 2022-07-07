@@ -1,40 +1,48 @@
 import React, { useState } from 'react'
 import { useRef } from 'react';
-import { Pie } from 'react-chartjs-2';
-
+import { Pie, getDatasetAtEvent, getElementAtEvent  } from 'react-chartjs-2';
 
 import './Profile.scss'
 
 const Profile = ({items, change, backProfile}) => {
 
   const [crypto, setCrypto] = useState('');
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState(0);
   const [usd] = useState(1);
 
-  const [isData,setData] = useState([])
+  const [isData,setData] = useState([]);
   // const asd = useRef()
+  
   const plusChange = (item) => {
     if(item.current_price*crypto>0 && item.name) {
       let obj = {
-                  labels: item.name,
-                  datasets: [{
-                    data: item.current_price*crypto,
-                    backgroundColor: `#${Math.random().toString(16).substring(7)}`
-                  }]
-                }
-      setTotal(total + (item.current_price*crypto))
-      setData(...isData.push(obj))
-    } 
+        labels: item.name,
+        datasets: [{
+          id: item.id,
+          data: item.current_price*crypto,
+          backgroundColor: `#${Math.random().toString(16).substring(2,8)}`
+        }]
+      }
+      setData(prevData => [...prevData, obj])
+      setTotal(total + (item.current_price*crypto))     
+    }
+    setCrypto('')
   }
-  
+
   const  minusChange = (item) => {
     if(total - (usd * item.current_price* crypto) >= 0){
       setTotal(total - (usd * item.current_price* crypto)) 
     }else {
       setTotal(0)
     }
-    // setCrypto('')
+    setCrypto('')
   }
+
+  const chartRef = useRef();
+  const onClick = (event) => {
+    console.log(getDatasetAtEvent(chartRef.current, event));
+  }
+
   return (
     <div className='profile'>
       <div className='profile_block'>
@@ -53,9 +61,8 @@ const Profile = ({items, change, backProfile}) => {
                             <input type="number" 
                               placeholder='0'
                               name={item.name}
-                              // defaultValue=''
                               // ref={asd}
-                              // value={crypto} 
+                              value={crypto.id} 
                               onChange={e=> {
                                   setCrypto(e.target.value)
                                 }
@@ -77,11 +84,14 @@ const Profile = ({items, change, backProfile}) => {
         <div className='profile_block-value'>
           <div className='profile_pie'>
            <Pie
+              ref={chartRef}
+              onClick={onClick}
               data={{
-                labels: isData.map(x=>x.labels),
+                labels: isData.map(x=> x.labels),
                 datasets: [{
+                  id: isData.map(x=> x.datasets[0].id),
                   data: isData.map(x=> x.datasets[0].data),
-                  backgroundColor: isData.map(x=> x.datasets[0].backgroundColor)
+                  backgroundColor: isData.map(x=> x.datasets[0].backgroundColor),
                 }]
               }}
             />
