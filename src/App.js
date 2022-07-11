@@ -153,8 +153,7 @@ function App() {
                         borderWidth: 2,
                         lineTension: 0.3,
                         pointBorderWidth: 2,
-                      }],
-                      
+                      }]
                     }}
                    />}
               </div>
