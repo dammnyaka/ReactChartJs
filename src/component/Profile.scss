@@ -1,12 +1,13 @@
 .profile {
   display: flex;
   color: white;
-  background-color: rgba(92, 92, 92, 0.281);;
-  
+  background-color: rgba(92, 92, 92, 0.281);
+
   &_block{
     display: flex;
     align-items: center;
     width: 100vw;
+
     &-change{
       display: flex;
       justify-content: space-evenly;
@@ -34,7 +35,7 @@
       content: '';
       border-right: 2px solid rgba(255, 255, 255, 0.7);
       height: 90%;
-  }
+    }
     &-value {
       display: flex;
       justify-content: center;

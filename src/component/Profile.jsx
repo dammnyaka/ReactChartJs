@@ -8,30 +8,37 @@ const Profile = ({items, change, backProfile}) => {
 
   const [crypto, setCrypto] = useState('');
   const [total, setTotal] = useState(0);
-  const [usd] = useState(1);
 
   const [isData,setData] = useState([]);
-  // const asd = useRef()
+  const asd = useRef()
   
   const plusChange = (item) => {
-    if(item.current_price*crypto>0 && item.name) {
-      let obj = {
-        labels: item.name,
-        datasets: [{
-          id: item.id,
-          data: item.current_price*crypto,
-          backgroundColor: `#${Math.random().toString(16).substring(2,8)}`
-        }]
-      }
-      setData(prevData => [...prevData, obj])
-      setTotal(total + (item.current_price*crypto))     
+    if(item.current_price*crypto > 0) {
+       let obj = {
+         labels: item.name,
+         datasets: [{
+           id: item.id,
+           data: item.current_price*crypto,
+           backgroundColor: `#${Math.random().toString(16).substring(2,8)}`
+         }]
+       }
+       if(isData.find(item=> item.labels === obj.labels)) {
+        const post = isData.find(i=> i.labels === obj.labels)
+        post.datasets[0].data = post.datasets[0].data + obj.datasets[0].data
+       } else {
+        setData(prevData=> [...prevData,obj])
+       }
+      setTotal(total + (item.current_price*crypto))
     }
     setCrypto('')
   }
 
   const  minusChange = (item) => {
-    if(total - (usd * item.current_price* crypto) >= 0){
-      setTotal(total - (usd * item.current_price* crypto)) 
+    if(total - (item.current_price* crypto) >= 0){
+      const post = isData.find(i=> i.labels === item.name)
+      post.datasets[0].data = post.datasets[0].data > 0 ?
+       post.datasets[0].data - item.current_price* crypto : post.datasets[0].data = 0
+      setTotal(total - (item.current_price* crypto)) 
     }else {
       setTotal(0)
     }
@@ -61,7 +68,7 @@ const Profile = ({items, change, backProfile}) => {
                             <input type="number" 
                               placeholder='0'
                               name={item.name}
-                              // ref={asd}
+                              ref={asd}
                               value={crypto.id} 
                               onChange={e=> {
                                   setCrypto(e.target.value)
