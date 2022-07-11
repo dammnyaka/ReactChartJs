@@ -101,6 +101,10 @@ const Profile = ({items, change, backProfile}) => {
                   backgroundColor: isData.map(x=> x.datasets[0].backgroundColor),
                 }]
               }}
+              options= {{
+                        maintainAspectRatio: false,
+                        
+                    }}
             />
           </div>
         </div>

@@ -118,3 +118,64 @@
 }
 
 
+@media all and (max-width: 600px) {
+  .app_block{
+    justify-content: flex-start;
+  }
+  .header {
+    margin-top: 10px;
+  }
+  .main {
+    display: flex;
+    flex-direction: column-reverse;
+ 
+    &_coin {
+      width: 100vw;
+    }
+    .coin_block {
+      padding: 10px;
+    }
+    .main_charts {
+      width: 100vw;
+      height: 100%;
+    }
+  }
+  .profile {
+    height: 100vh;
+    .profile_block {
+      flex-direction: column;
+      &-line {
+        border-right: none;
+      }
+    }
+    .profile_block-change {
+      width: 100%;
+    }
+    .profile_menu {
+      width: 100%;
+      box-shadow: none;
+    }
+    .profile_block-value {
+      width: 100%;
+      background-color: black;
+    }
+    .profile_bar-icon {
+      width: 30%;
+      margin-right: 5px;
+    }
+    .profile_bar-price {
+      width: 25%;
+      margin: 5px;
+    }
+    .profile_bar-navigation {
+      width: 60%;
+      justify-content: end;
+      margin-right: 10px;
+    }
+    .profile_pie {
+      width: 95%;
+      height: 350px;
+    }
+  }
+
+}
